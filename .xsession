@@ -15,9 +15,8 @@ fi
 
 xset -b b off
 
-if type syndaemon >/dev/null; then
-  # If syndaemon is installed, we're on a laptop.
-  syndaemon -dki 0.5
+if type xcape >/dev/null; then
+  # If xcape is installed, we are on a laptop.
   setxkbmap -layout us,hu,il -variant ,,phonetic -option ctrl:nocaps -option grp:alt_space_toggle
   xcape -e '#66=Escape'
 else
