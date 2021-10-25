@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env zsh
 
 cfg=xmonad.hs
 [[ $1 -nt $cfg ]] && exit
@@ -6,6 +6,8 @@ cfg=xmonad.hs
 export PATH=$HOME/.ghcup/bin:$PATH
 exec cabal exec ghc -- \
   --make $cfg \
+  -package xmonad \
+  -package xmonad-contrib \
   -i -ilib \
   -fforce-recomp \
   -main-is main \

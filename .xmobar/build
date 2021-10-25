@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env zsh
 
 cfg=xmobar.hs
 [[ $1 -nt $cfg ]] && exit
@@ -6,8 +6,8 @@ cfg=xmobar.hs
 export PATH=$HOME/.ghcup/bin:$PATH
 exec cabal exec ghc -- \
   --make $cfg \
-  -i \
-  -ilib \
+  -package xmobar \
+  -i -ilib \
   -fforce-recomp \
   -main-is main \
   -v0 \
