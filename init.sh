@@ -15,5 +15,5 @@ done
 
 for i in .config/*; do
   echo "Linking $i"
-  ln -s ../$src/$cfg/$i ~/$cfg/
+  ln -s ../$src/$i ~/$cfg/
 done
