@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+base, quote = ARGV
+exec 'chromium', "--app=https://trade.kraken.com/charts/KRAKEN:#{base ? base.upcase : 'BTC'}-#{quote ? quote.upcase : 'EUR'}"

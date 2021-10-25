@@ -1,0 +1,44 @@
+*foreground:   #ebdbb2
+*background:   #000000
+*cursorColor:  #ebdbb2
+
+*color0:       #000000
+*color1:       #cc241d
+*color2:       #98971a
+*color3:       #d79921
+*color4:       #458588
+*color5:       #b16286
+*color6:       #689d6a
+*color7:       #a89984
+*color8:       #504945
+*color9:       #fb4934
+*color10:      #b8bb26
+*color11:      #fabd2f
+*color12:      #83a598
+*color13:      #d3869b
+*color14:      #8ec07c
+*color15:      #ebdbb2
+
+XTerm*termName:xterm-256color
+XTerm*allowWindowOps:on
+XTerm*reverseVideo:off
+XTerm*fullscreen:never
+XTerm*faceName:Droid Sans Mono Slashed for Powerline
+XTerm*faceSize:8
+XTerm*VT100.geometry: 80x24
+XTerm*font: 7x13
+XTerm*metaSendsEscape:true
+
+Xcursor*size: 16
+
+URxvt*reverseVideo:off
+URxvt*font:xft:Droid Sans Mono Slashed for Powerline:style=Regular:size=8:minspace=False
+URxvt*boldFont:xft:Droid Sans Mono Slashed for Powerline:style=Regular:size=8:minspace=False
+URxvt*italicFont:xft:Droid Sans Mono Slashed for Powerline:style=Regular:size=8:minspace=False
+URxvt*boldItalicFont:xft:Droid Sans Mono Slashed for Powerline:style=Regular:size=8:minspace=False
+URxvt*letterSpace:-1
+URxvt*lineSpace:0
+URxvt*scrollBar:false
+
+URxvt*foreground: rgb:c0/c0/c0
+URxvt*background: rgb:00/00/00

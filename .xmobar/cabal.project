@@ -1,0 +1,4 @@
+packages: *-git/*.cabal
+
+package xmobar
+  flags: +with_xft +with_utf8 +with_xpm
