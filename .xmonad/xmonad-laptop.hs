@@ -12,15 +12,15 @@ import qualified XMonad.StackSet as W
 
 main = do
   bar <- spawnPipe "xmobar ~/.xmobar/xmobar.hs"
-  xmonad $ docks $ def { focusedBorderColor = "#bdae93"
-                       , handleEventHook = fullscreenEventHook
-                       , layoutHook =  avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
-                       , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
-                       , modMask = mod
-                       , normalBorderColor = "#505050"
-                       , terminal = "urxvt" } `additionalKeys` keys
+  xmonad $ ewmh . ewmhFullscreen . docks $
+           def { focusedBorderColor = "#bdae93"
+               , layoutHook =  avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
+               , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
+               , modMask = mod
+               , normalBorderColor = "#505050"
+               , terminal = "urxvt" } `additionalKeys` keys
     where
-      tall = Tall 1 (3/100) (1/2)
+      tall = Tall 1 (3/100) (17/25)
       border = Border 4 4 4 4
       pp = def { ppCurrent = xmobarColor "white" ""
                , ppTitle = xmobarColor "#b8bb26" "" . shorten 120

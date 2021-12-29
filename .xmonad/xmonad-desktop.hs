@@ -11,15 +11,15 @@ import qualified XMonad.StackSet as W
 
 main = do
   bar <- spawnPipe "xmobar ~/.xmobar/xmobar.hs"
-  xmonad $ docks $ def { layoutHook =  avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
-                       , terminal = "urxvt"
-                       , focusedBorderColor = "#bdae93"
-                       , handleEventHook = fullscreenEventHook
-                       , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
-                       , modMask = mod
-                       , normalBorderColor = "#505050" } `additionalKeys` keys
+  xmonad $ ewmh . ewmhFullscreen . docks $
+           def { layoutHook = avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
+               , terminal = "urxvt"
+               , focusedBorderColor = "#bdae93"
+               , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
+               , modMask = mod
+               , normalBorderColor = "#505050" } `additionalKeys` keys
     where
-      tall = Tall 1 (3/100) (1/2)
+      tall = Tall 1 (3/100) (17/25)
       border = Border 4 4 4 4
       pp = def { ppCurrent = xmobarColor "white" ""
                , ppTitle = xmobarColor "#b8bb26" "" . shorten 120
@@ -30,7 +30,7 @@ main = do
         , ((mod, xK_c), spawn "tv cnn")
         , ((mod, xK_s), sendMessage ToggleStruts)
         , ((mod, xK_q), spawn "xmonad --recompile && xmonad --restart")
-        , ((mod, xK_bracketright), spawn "import ~/screenshot-`date '+%Y-%m-%d-%H%M%S'`.png")
+        , ((mod, xK_bracketright), spawn "xdotool mousemove_relative 6 0; import ~/screenshot-`date '+%Y-%m-%d-%H%M%S'`.png")
         , ((mod, xK_b), spawn "chromium")
         , ((mod, xK_Left),  withFocused $ keysMoveWindow (-1, 0))
         , ((mod, xK_Right), withFocused $ keysMoveWindow (1, 0))
