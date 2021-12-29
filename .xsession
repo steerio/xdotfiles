@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 # export NO_AT_BRIDGE=1
 
+if [[ "$PATH" != *".asdf"* ]]; then
+  PATH=$HOME/.asdf/shims:$PATH
+fi
 if [[ "$PATH" != *".local"* ]]; then
   PATH=$HOME/.local/bin:$PATH
-fi
-if [[ "$PATH" != *"asdf"* ]]; then
-  PATH=$HOME/.asdf/shims:$PATH
 fi
 export PATH
 
