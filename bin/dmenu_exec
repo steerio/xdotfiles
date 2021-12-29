@@ -1,2 +1,2 @@
 #!/usr/bin/zsh
-exec $(dmenu_path | dmenu "$@") &
+exec $(dmenu_path | dmenu -nb '#282828' -nf '#ebdbb2' -sb '#458588' -sf '#fbf1c7' "$@") &
