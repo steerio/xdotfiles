@@ -1,6 +1,7 @@
 mp.input_define_section("stream",
 [[WHEEL_UP ignore
 WHEEL_DOWN ignore
+MOUSE_BTN2 ignore
 RIGHT ignore
 LEFT ignore
 UP ignore
