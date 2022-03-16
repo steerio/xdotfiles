@@ -5,6 +5,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+import XMonad.Layout.ResizableTile
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Actions.FloatKeys (keysMoveWindow)
 import qualified XMonad.StackSet as W
@@ -19,7 +20,7 @@ main = do
                , modMask = mod
                , normalBorderColor = "#505050" } `additionalKeys` keys
     where
-      tall = Tall 1 (3/100) (17/25)
+      tall = ResizableTall 1 (4/120) (17/25) []
       border = Border 4 4 4 4
       pp = def { ppCurrent = xmobarColor "white" ""
                , ppTitle = xmobarColor "#b8bb26" "" . shorten 120
@@ -32,11 +33,14 @@ main = do
         , ((mod, xK_q), spawn "xmonad --recompile && xmonad --restart")
         , ((mod, xK_bracketright), spawn "xdotool mousemove_relative 6 0; import ~/screenshot-`date '+%Y-%m-%d-%H%M%S'`.png")
         , ((mod, xK_b), spawn "chromium")
-        , ((mod, xK_Left),  withFocused $ keysMoveWindow (-1, 0))
-        , ((mod, xK_Right), withFocused $ keysMoveWindow (1, 0))
-        , ((mod, xK_Up),    withFocused $ keysMoveWindow (0, -1))
-        , ((mod, xK_Down),  withFocused $ keysMoveWindow (0, 1)) ]
+        , ((mod, xK_Up),    sendMessage MirrorExpand)
+        , ((mod, xK_Down),  sendMessage MirrorShrink)
+        , ((msh, xK_Left),  withFocused $ keysMoveWindow (-1, 0))
+        , ((msh, xK_Right), withFocused $ keysMoveWindow (1, 0))
+        , ((msh, xK_Up),    withFocused $ keysMoveWindow (0, -1))
+        , ((msh, xK_Down),  withFocused $ keysMoveWindow (0, 1)) ]
         ++
-        [ ((mod .|. shiftMask, k), windows (W.greedyView i . W.shift i))
+        [ ((msh, k), windows (W.greedyView i . W.shift i))
           | (i, k) <- zip (workspaces def) [xK_1..xK_9]]
       mod = mod4Mask
+      msh = mod .|. shiftMask
