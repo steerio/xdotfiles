@@ -13,8 +13,8 @@ import qualified XMonad.StackSet as W
 main = do
   bar <- spawnPipe "xmobar ~/.xmobar/xmobar.hs"
   xmonad $ ewmh . ewmhFullscreen . docks $
-           def { focusedBorderColor = "#bdae93"
-               , layoutHook =  avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
+           def { layoutHook = avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
+               , focusedBorderColor = "#bdae93"
                , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
                , modMask = mod
                , normalBorderColor = "#505050"
@@ -31,7 +31,7 @@ main = do
         , ((mod, xK_c), spawn "tv cnn")
         , ((mod, xK_s), sendMessage ToggleStruts)
         , ((mod, xK_q), spawn "xmonad --recompile && xmonad --restart")
-        , ((mod, xK_bracketright), spawn "import ~/screenshot-`date '+%Y-%m-%d-%H%M%S'`.png")
+        , ((mod, xK_bracketright), spawn "xdotool mousemove_relative 6 0; import ~/screenshot-`date '+%Y-%m-%d-%H%M%S'`.png")
         , ((mod, xK_b), spawn "chromium")
         , ((mod, xK_Left),  withFocused $ keysMoveWindow (-1, 0))
         , ((mod, xK_Right), withFocused $ keysMoveWindow (1, 0))

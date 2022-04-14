@@ -1,0 +1,19 @@
+cradle:
+  cabal:
+    - path: "xmobar-git/src"
+      component: "lib:xmobar"
+
+    - path: "xmobar-git/app/Main.hs"
+      component: "xmobar:exe:xmobar"
+
+    - path: "xmobar-git/src"
+      component: "xmobar:test:XmobarTest"
+
+    - path: "xmobar-git/test"
+      component: "xmobar:test:XmobarTest"
+
+    - path: "xmobar-git/bench/main.hs"
+      component: "xmobar:bench:xmobarbench"
+
+    - path: "./xmobar.hs"
+      component: "xmobar-local:exe:xmobar-local"

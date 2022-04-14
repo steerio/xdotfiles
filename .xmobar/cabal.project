@@ -1,4 +1,4 @@
-packages: *-git/*.cabal
+packages: *-git/*.cabal xmobar-local.cabal
 with-compiler: ghc-9.0.2
 
 package xmobar

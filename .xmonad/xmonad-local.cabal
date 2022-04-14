@@ -1,0 +1,7 @@
+name: xmonad-local
+build-type: Simple
+version: 0.0.1
+
+executable xmonad-local
+  main-is: xmonad.hs
+  build-depends: base, X11, xmonad, xmonad-contrib
