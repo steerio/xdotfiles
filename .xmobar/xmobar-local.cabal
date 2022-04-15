@@ -4,4 +4,4 @@ version: 0.0.1
 
 executable xmobar-local
   main-is: xmobar.hs
-  build-depends: xmobar
+  build-depends: xmobar, base, http-conduit, aeson, containers
