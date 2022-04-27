@@ -1,15 +1,11 @@
 #!/usr/bin/env zsh
 
-cfg=xmonad.hs
-[[ $1 -nt $cfg ]] && exit
+set -eo pipefail
 
 export PATH=$HOME/.ghcup/bin:$PATH
-exec cabal exec ghc -- \
-  --make $cfg \
-  -package xmonad \
-  -package xmonad-contrib \
-  -i -ilib \
-  -fforce-recomp \
-  -main-is main \
-  -v0 \
-  -o "$1"
+linked=$(cabal build xmonad-local|awk '$1 == "Linking" { print "1" }')
+
+if [[ -n $linked || ! -a $1 ]]; then
+  bin=$(jq -r '.["install-plan"][] | select(.["pkg-name"] == "xmonad-local").components["exe:xmonad-local"]["bin-file"]' dist-newstyle/cache/plan.json)
+  ln -f $(realpath --relative-to=. $bin) $1
+fi

@@ -1,14 +1,9 @@
 #!/usr/bin/env zsh
 
-cfg=xmobar.hs
-[[ $1 -nt $cfg ]] && exit
-
 export PATH=$HOME/.ghcup/bin:$PATH
-exec cabal exec ghc -- \
-  --make $cfg \
-  -package xmobar \
-  -i -ilib \
-  -fforce-recomp \
-  -main-is main \
-  -v0 \
-  -o "$1"
+linked=$(cabal build xmobar-local|awk '$1 == "Linking" { print "1" }')
+
+if [[ -n $linked || ! -a $1 ]]; then
+  bin=$(jq -r '.["install-plan"][] | select(.["pkg-name"] == "xmobar-local").components["exe:xmobar-local"]["bin-file"]' dist-newstyle/cache/plan.json)
+  ln -f $(realpath --relative-to=. $bin) $1
+fi
