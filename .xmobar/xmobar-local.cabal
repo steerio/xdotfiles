@@ -1,6 +1,7 @@
 name: xmobar-local
 build-type: Simple
 version: 0.0.1
+cabal-version: >= 1.2
 
 executable xmobar-local
   main-is: xmobar.hs

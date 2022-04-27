@@ -1,6 +1,7 @@
 name: xmonad-local
 build-type: Simple
 version: 0.0.1
+cabal-version: >= 1.2
 
 executable xmonad-local
   main-is: xmonad.hs
