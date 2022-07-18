@@ -9,7 +9,7 @@ link () {
     local bname=$(basename $bin)
     local dest=~/.local/bin/$bname
     if [[ ! -f $dest || $(stat -L -c %d:%i $bin) != $(stat -L -c %d:%i $dest) ]]; then
-      echo === Linking $bname
+      echo "=== Linking $bname"
       ln -f $bin ~/.local/bin/
     fi
   fi
