@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (docks, avoidStruts, ToggleStruts(..))
 import XMonad.Hooks.DynamicLog
@@ -13,8 +14,9 @@ import qualified XMonad.StackSet as W
 main = do
   bar <- spawnPipe "xmobar ~/.xmobar/xmobar.hs"
   xmonad $ ewmh . ewmhFullscreen . docks $
-           def { layoutHook = avoidStruts $ smartBorders $ spacingRaw True border True border True tall ||| Full
+           def { layoutHook = avoidStruts $ smartBorders $ gaps tall ||| Full
                , terminal = "urxvt"
+               , manageHook = insertPosition Below Newer
                , focusedBorderColor = "#bdae93"
                , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
                , modMask = mod
@@ -22,15 +24,18 @@ main = do
     where
       tall = ResizableTall 1 (4/120) (17/25) []
       border = Border 4 4 4 4
+      gaps = spacingRaw True border True border True
       pp = def { ppCurrent = xmobarColor "white" ""
                , ppTitle = xmobarColor "#b8bb26" "" . shorten 120
                , ppSep = " <fc=#7c6f64>|</fc> " }
       keys =
         [ ((mod, xK_p), spawn "dmenu_exec")
+        , ((mod, xK_m), spawn "tv")
+        , ((mod, xK_t), spawn "twitter")
         , ((mod, xK_0), spawn "systemctl suspend")
-        , ((mod, xK_c), spawn "tv cnn")
         , ((mod, xK_s), sendMessage ToggleStruts)
         , ((mod, xK_q), spawn "xmonad --recompile && xmonad --restart")
+        , ((mod, xK_bracketleft), withFocused $ windows . W.sink)
         , ((mod, xK_bracketright), spawn "xdotool mousemove_relative 6 0; import ~/screenshot-`date '+%Y-%m-%d-%H%M%S'`.png")
         , ((mod, xK_b), spawn "chromium")
         , ((mod, xK_Up),    sendMessage MirrorExpand)
