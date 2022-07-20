@@ -12,6 +12,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Actions.FloatKeys (keysMoveWindow)
 import XMonad.StackSet hiding (workspaces)
+import Graphics.X11.ExtraTypes.XF86
 
 main = do
   bar <- spawnPipe "xmobar ~/.xmobar/xmobar.hs"
@@ -47,9 +48,9 @@ main = do
         , ((msh, xK_Left),  withFocused $ keysMoveWindow (-1, 0))
         , ((msh, xK_Right), withFocused $ keysMoveWindow (1, 0))
         , ((msh, xK_Up),    withFocused $ keysMoveWindow (0, -1))
-        , ((msh, xK_Down),  withFocused $ keysMoveWindow (0, 1)) ]
+        , ((msh, xK_Down),  withFocused $ keysMoveWindow (0, 1))
         , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 10")
-        , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10")
+        , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10") ]
         ++
         [ ((msh, k), windows (greedyView i . shift i))
           | (i, k) <- zip (workspaces def) [xK_1..xK_9]]
