@@ -4,6 +4,5 @@ dist-newstyle
 *.o
 *.errors
 .xmonad/xmonad-*-*
-.xmonad/xmonad.hs
 .xmobar/xmobar
 .xmobar/xmobar.hs
