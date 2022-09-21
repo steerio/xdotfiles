@@ -11,7 +11,7 @@ import Data.List (intercalate)
 import Text.Printf (printf)
 
 main = xmobar $ defaultConfig
-  { font = "xft:Droid Sans Mono Slashed for Powerline:size=8:antialias=true"
+  { font = "Droid Sans Mono Slashed for Powerline 8"
   , bgColor = "black"
   , fgColor = "#bdae93"
   , iconRoot = "/home/steerio/.xmobar/icons"
