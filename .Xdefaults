@@ -31,6 +31,10 @@ XTerm*metaSendsEscape:true
 
 Xcursor*size: 16
 
+URxvt.perl-ext-common: osc52
+# URxvt.keysym.S-Insert: eval:paste_clipboard
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 URxvt*reverseVideo:off
 URxvt*font:xft:Droid Sans Mono Slashed for Powerline:style=Regular:size=8:minspace=False
 URxvt*boldFont:xft:Droid Sans Mono Slashed for Powerline:style=Regular:size=8:minspace=False
