@@ -6,3 +6,4 @@ dist-newstyle
 .xmonad/xmonad-*-*
 .xmobar/xmobar
 .xmobar/xmobar.hs
+/.config/gtk-3.0/bookmarks
