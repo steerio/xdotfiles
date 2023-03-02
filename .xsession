@@ -17,11 +17,11 @@ xset -b b off
 
 if type xcape >/dev/null; then
   # If xcape is installed, we are on a laptop.
-  setxkbmap -layout us,hu,il -variant ,,phonetic -option ctrl:nocaps -option grp:alt_space_toggle
   xcape -e '#66=Escape'
+  setxkbmap -layout us,hu,il -variant ,,phonetic -option ctrl:nocaps -option grp:alt_space_toggle
 else
   setxkbmap -layout us,hu,il -variant ,,phonetic -option grp:alt_space_toggle
 fi
 picom -b
-unclutter -b --exclude-root --jitter 5
+pidof -q unclutter || unclutter -d $DISPLAY -b --jitter 5 --ignore-scrolling &
 exec xmonad
