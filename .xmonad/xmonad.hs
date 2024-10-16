@@ -73,12 +73,14 @@ data Margin = Take !Dimension | Keep !Dimension | Ratio !Rational | Bigger !Marg
   deriving (Show, Read)
 
 withMargin :: Dimension -> Margin -> Dimension
-withMargin dim = \case
-  (Keep n)     -> n
-  (Take n)     -> dim - n
-  (Ratio r)    -> floor (r * fromIntegral dim)
-  (Bigger a b) -> max (withMargin dim a) (withMargin dim b)
-  Edge         -> dim
+withMargin dim = max 1 . min dim . calc dim
+  where
+    calc dim = \case
+      (Keep n)     -> n
+      (Take n)     -> dim - n
+      (Ratio r)    -> floor (r * fromIntegral dim)
+      (Bigger a b) -> max (calc dim a) (calc dim b)
+      Edge         -> dim
 
 data Overlap a = Overlap { overlapNMaster :: !Int
                          , overlapLeft :: !Margin
@@ -114,6 +116,5 @@ overlap left right gap r@(Rectangle x y w h) nmaster n = if n <= nmaster || nmas
     r1 = let w' = calc left in
            Rectangle (fromIntegral (gap + w - w')) (y + fromIntegral gap) w' h'
     r2 = Rectangle x y (calc right) h'
-    calc = let w' = w - gap
-           in max 1 . min w' . withMargin w'
+    calc = withMargin (w - gap)
     h' = h - gap
