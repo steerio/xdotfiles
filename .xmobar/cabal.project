@@ -1,5 +1,5 @@
 packages: *-git/*.cabal xmobar-local.cabal
-with-compiler: ghc-9.0.2
+with-compiler: ghc-9.8.2
 
 package xmobar
   flags: +with_utf8 +with_xpm
