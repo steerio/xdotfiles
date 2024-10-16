@@ -1,3 +1,3 @@
-#!/usr/bin/env ruby
+#!/home/steerio/.asdf/shims/ruby
 base, quote = ARGV
-exec 'chromium', "--app=https://trade.kraken.com/charts/KRAKEN:#{base ? base.upcase : 'BTC'}-#{quote ? quote.upcase : 'EUR'}"
+exec 'chromium', "--app=https://pro.kraken.com/app/trade/#{base || 'btc'}-#{quote || 'eur'}"
