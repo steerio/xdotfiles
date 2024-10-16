@@ -19,7 +19,6 @@ main = do
   xmonad $ ewmh . ewmhFullscreen . docks $
            def { layoutHook = avoidStruts $ tall ||| overlap ||| noBorders Full
                , terminal = "urxvt"
-               , focusFollowsMouse = False
                , manageHook = insertPosition Below Newer
                , focusedBorderColor = "#bdae93"
                , logHook = logHook def >> dynamicLogWithPP pp { ppOutput = hPutStrLn bar }
@@ -39,6 +38,7 @@ main = do
       keys =
         [ ((mod, xK_p), spawn "dmenu_exec")
         , ((mod, xK_m), spawn "tv")
+        , ((mod, xK_equal), spawn "pavucontrol")
         , ((mod, xK_t), spawn "twitter")
         , ((mod, xK_0), spawn "systemctl suspend")
         , ((mod, xK_s), sendMessage ToggleStruts)
