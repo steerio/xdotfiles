@@ -2,4 +2,4 @@ packages: *-git/*.cabal xmobar-local.cabal
 with-compiler: ghc-9.8.2
 
 package xmobar
-  flags: +with_utf8 +with_xpm
+  flags: +with_utf8 +with_xpm +with_iwlib
