@@ -8,9 +8,10 @@ link () {
   if [[ -f $bin ]]; then
     local bname=$(basename $bin)
     local dest=~/.local/bin/$bname
-    if [[ ! -f $dest || $(stat -L -c %d:%i $bin) != $(stat -L -c %d:%i $dest) ]]; then
+    if [[ ! -f $dest || $(stat -Lc %d:%i $bin) != $(stat -Lc %d:%i $dest) ]]; then
       echo "=== Linking $bname"
-      ln -f $bin ~/.local/bin/
+      strip $bin
+      ln -f $(realpath --relative-to=. $bin) $dest
     fi
   fi
 }
@@ -23,7 +24,7 @@ done
 
 cd ~/.xmonad
 echo "=== Building xmonad"
-cabal build xmonad xmonad-contrib --upgrade-dependencies
+cabal build xmonad --upgrade-dependencies
 link xmonad
 
 echo "=== Building xmobar"

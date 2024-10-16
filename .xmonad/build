@@ -1,11 +1,12 @@
 #!/usr/bin/env zsh
 
 set -eo pipefail
-
 export PATH=$HOME/.ghcup/bin:$PATH
-linked=$(cabal build xmonad-local|awk '$1 == "Linking" { print "1" }')
 
-if [[ -n $linked || ! -a $1 ]]; then
-  bin=$(jq -r '.["install-plan"][] | select(.["pkg-name"] == "xmonad-local").components["exe:xmonad-local"]["bin-file"]' dist-newstyle/cache/plan.json)
+cabal build xmonad-local
+bin=$(jq -r '.["install-plan"][] | select(.["pkg-name"] == "xmonad-local").components["exe:xmonad-local"]["bin-file"]' dist-newstyle/cache/plan.json)
+
+if [[ ! -a $1 || "$(stat -Lc '%d:%i' $bin)" != "$(stat -Lc '%d:%i' $1)" ]]; then
+  strip $bin
   ln -f $(realpath --relative-to=. $bin) $1
 fi
